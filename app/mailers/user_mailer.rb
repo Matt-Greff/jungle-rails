@@ -1,9 +1,10 @@
 class UserMailer < ApplicationMailer
-    default from: 'notifications@example.com'
- 
-    def welcome_email
-      @user = params[:user]
-      @url  = 'http://example.com/login'
-      mail(to: @user.email, subject: 'Welcome to My Awesome Site')
-    end
+    default from: 'no-reply@example.com',
+    return_path: 'system@example.com'
+
+  def order_summary_email(order)
+    @account = order
+    mail(to: order.email,
+      bcc: ["bcc@example.com", "Order Watcher <watcher@example.com>"])
+  end
 end
