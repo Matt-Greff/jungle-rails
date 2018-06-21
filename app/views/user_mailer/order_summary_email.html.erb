@@ -1,0 +1,15 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thanks for shopping at jungle.com</h1>
+    <h2> you spent <%= number_to_currency(@account.total_cents / 100.00) %> with us, try spending more next time.</h2>
+    <% @account.line_items.each do |item| %>
+      <% @product=Product.find(item.product_id) %>
+      <h4> <%= pluralize(item.quantity, @product.name)%> for <%= number_to_currency(item.total_price_cents / 100.0)%> </h4>
+      <% end %>
+  </body>
+</html>
