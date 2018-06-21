@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   def show
     @order      = Order.find(params[:id])
     @line_items = @order.line_items.all()
+    UserMailer.order_summary_email(@order).deliver # sends the email
   end
 
   def create
