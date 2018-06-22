@@ -1,7 +1,7 @@
 
   <div class="register-form">
   <header class="page-header">
-  <h1>New User</h1>
+  <h1><% if @used_email then%>Your Email Is Already Taken <% else %> New User <% end %></h1>
   </header>
   
   <%= form_for :user, url: '/users' do |f| %>

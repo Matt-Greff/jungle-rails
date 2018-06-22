@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
 
   def order_summary_email(order)
     @account = order
-    mail(to: order.email,
+    mail(to: order.email, subject: "Jungle Shop Order##{order.id}",
       bcc: ["bcc@example.com", "Order Watcher <watcher@example.com>"])
   end
 end
