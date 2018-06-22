@@ -1,9 +1,12 @@
 <section class="cart-show">
 
   <header class="page-header">
+<% if cart.length < 1 %>
+    <h1><center>Your Cart Is Empty!</center></h1>
+<% else %>
     <h1>My Cart</h1>
   </header>
-
+  
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -32,22 +35,23 @@
       </tfoot>
     </table>
   </div>
-
   <div class="row">
-    <div class="col-xs-12">
-      <%= form_tag orders_path do %>
-        <script
-          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-amount="<%= @cart_total * 100 %>"
-          data-name="Jungle"
-          data-description="#{current_user.email}'s Jungle Order"
-          data-locale="auto"
-          data-email="<%= current_user.email %>"
-          data-currency="cad">
-        </script>
-      <% end %>
+  <div class="col-xs-12">
+  <%= form_tag orders_path do %>
+    <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-amount="<%= @cart_total * 100 %>"
+    data-name="Jungle"
+    data-description="#{current_user.email}'s Jungle Order"
+    data-locale="auto"
+    data-email="<%= current_user.email %>"
+    data-currency="cad">
+    </script>
+    <% end %>
     </div>
-  </div>
-
-</section>
+    </div>
+<% end %>
+    
+    </section>
+    
