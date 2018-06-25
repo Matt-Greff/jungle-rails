@@ -46,7 +46,7 @@
     <% @product.reviews.order("created_at DESC").each do |review| %>
       <h3><%= find_email_by_id(review.user_id) %> <%= create_rating_stars(review.rating) %> </h3>
       <p><%= review.description %></p>
-      <% if review.user_id == current_user.id %>
+      <% if current_user && review.user_id == current_user.id %>
       <%= link_to 'Delete', product_review_path(@product, review),
         data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-primary'%>
       <%end%>
