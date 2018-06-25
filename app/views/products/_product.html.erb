@@ -2,7 +2,8 @@
   <header>
     <%= link_to product do %>
       <%= image_tag product.image.thumb, alt: product.name %>
-      <h4><%= product.name %></h4>
+      <h4><%= product.name %> 
+      <%= create_rating_stars(product.reviews.average(:rating))%></h4>
     <% end %>
   </header>
   <p class="description">

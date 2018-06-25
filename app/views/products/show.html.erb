@@ -27,5 +27,32 @@
     </div>
 
   </article>
+  <div class="reviews">
+  <hr class="masthead-hr">
 
+    <h2>Reviews</h2>
+    <% @review = @product.reviews.create %>   
+    <h3><%=email_to_include(current_user)%></h3>
+    
+      <%= form_for @review do |f|%>
+        <div class="form-group">
+          <%= f.select :rating, options_for_select([["☆", 1],["☆☆", 2],["☆☆☆", 3],["☆☆☆☆", 4],["☆☆☆☆☆", 5]], 5)%>
+          <%= f.label :description %>
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+        <%= submit_tag 'Submit Review', class: 'btn btn-primary' %>
+      <% end %>
+    <hr class="masthead-hr">
+    <% @product.reviews.order("created_at DESC").each do |review| %>
+      <h3><%= find_email_by_id(review.user_id) %> <%= create_rating_stars(review.rating) %> </h3>
+      <p><%= review.description %></p>
+      <% if review.user_id == current_user.id %>
+      <%= link_to 'Delete', product_review_path(@product, review),
+        data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-primary'%>
+      <%end%>
+        <hr class="masthead-hr">
+    <% end %>
+
+  </div>
+      
 </section>

@@ -26,6 +26,7 @@ class Admin::ProductsController < Admin::BaseAdminController
   private
 
   def product_params
+    byebug
     params.require(:product).permit(
       :name,
       :description,

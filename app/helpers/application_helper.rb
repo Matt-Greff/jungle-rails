@@ -14,4 +14,21 @@ module ApplicationHelper
     def email_to_include (user)
         user == nil ? "Guest" : user.email
     end
+
+    def find_email_by_id(id)
+        User.find_by(id: id).email
+    end
+
+    def create_rating_stars(int)
+        stars = ''
+        for counter in 1..int.to_i
+            stars += "☆"
+        end
+        stars
+    end
+
+    def reviews_path
+        product_reviews_path @product
+    end
+
 end
